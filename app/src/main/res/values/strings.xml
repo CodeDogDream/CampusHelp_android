@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">CampusHelp</string>
+    <string name="telephone">手机号</string>
+    <string name="write_telephone_number">请填写手机号</string>
+    <string name="get_telephone_captcha">获取验证码</string>
+    <string name="write_captcha">请填写验证码</string>
+    <string name="captcha">验证码</string>
+    <string name="login">登录</string>
 </resources>
