@@ -4,18 +4,42 @@ android {
     compileSdkVersion 25
     buildToolsVersion '25.0.2'
     defaultConfig {
-        applicationId "com.dream.word.campushelp"
-        minSdkVersion 19
+        applicationId "com.dream.work.campushelp"
+        minSdkVersion 18
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
     }
+    signingConfigs {//签名配置
+        release {//发布版签名配置
+            storeFile file("keystore.jks")//密钥文件路径
+            storePassword "12345678"//密钥文件密码
+            keyAlias "key"//key别名
+            keyPassword "12345678"//key密码
+        }
+        debug {
+            storeFile file("keystore.jks")//密钥文件路径
+            storePassword "12345678"//密钥文件密码
+            keyAlias "key"//key别名
+            keyPassword "12345678"//key密码
+        }
+    }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release//设置签名信息
+        }
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    sourceSets{
+        main{
+            jniLibs.srcDirs=['jniLibs']
         }
     }
 }
@@ -33,4 +57,7 @@ dependencies {
     compile 'com.squareup.retrofit2:converter-gson:2.2.0'
     compile 'com.squareup.retrofit2:adapter-rxjava2:2.2.0'
     compile 'com.google.code.gson:gson:2.7'
+    compile files('jniLibs/BaiduLBS_Android.jar')
+    compile 'com.android.support:recyclerview-v7:25.2.0'
+    compile 'com.github.bumptech.glide:glide:3.7.0'
 }
