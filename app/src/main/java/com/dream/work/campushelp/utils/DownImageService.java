@@ -14,7 +14,7 @@ import java.util.ArrayList;
  * Created by Dream on 2017/4/16.
  */
 
-public class DownImageService extends Thread {
+public class DownImageService implements Runnable {
     private ArrayList<String> urls;
     private ImageDownloadCallback callback;
     private Context context;
@@ -31,6 +31,7 @@ public class DownImageService extends Thread {
         }
         return instant;
     }
+
 
     private DownImageService() {
 

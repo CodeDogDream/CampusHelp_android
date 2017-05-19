@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <EditText
+        android:id="@id/my_title"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_margin="10dp"
+        android:background="@drawable/edit_border"
+        android:gravity="center"
+        android:hint="@string/title"
+        android:maxLength="25"
+        android:padding="10dp"
+        android:singleLine="true" />
+
+
+    <EditText
+        android:id="@id/content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/my_title"
+        android:layout_margin="10dp"
+        android:background="@drawable/edit_border"
+        android:gravity="left|top"
+        android:hint="@string/content"
+        android:inputType="textMultiLine"
+        android:maxLength="200"
+        android:minLines="10"
+        android:padding="10dp"
+        android:textColor="@color/black_66"
+        android:textSize="14sp" />
+
+    <EditText
+        android:id="@id/tag"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:layout_below="@id/content"
+        android:layout_margin="10dp"
+        android:background="@drawable/edit_border"
+        android:gravity="left|center"
+        android:hint="@string/tag"
+        android:maxLength="12"
+        android:padding="10dp"
+        android:singleLine="true" />
+
+</RelativeLayout>

@@ -8,19 +8,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.dream.work.campushelp.activity.MainActivity;
+
 /**
  * Created by Administrator on 2017/3/14.
  */
 
 public abstract class BaseFragment extends Fragment {
-    public Activity thisActivity;
+    public MainActivity thisActivity;
     public Fragment thisFragment;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         thisFragment = this;
-        thisActivity = thisFragment.getActivity();
+        thisActivity = (MainActivity) thisFragment.getActivity();
         View view = inflater.inflate(getLayoutId(), container, false);
         bindView(view);
         return view;

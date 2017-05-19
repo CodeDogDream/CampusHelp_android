@@ -11,4 +11,25 @@
     <string name="captcha_null">验证码不能为空</string>
     <string name="login_success">登录成功</string>
     <string name="sent_captcha">验证码已发送</string>
+
+
+    <!--标题-->
+    <string name="my_help">我的求助</string>
+    <string name="nearby_help">附近的求助</string>
+    <string name="about_us">关于我们</string>
+    <string name="modify_user_info">修改用户信息</string>
+
+    <string name="send_help_info">新信息</string>
+    <string name="publish">发送</string>
+    <string name="tag">所属分类（可选）</string>
+
+    <string name="nickname">昵称</string>
+    <string name="intro">个性签名</string>
+    <string name="gender">性别</string>
+    <string name="title">标题</string>
+    <string name="content">输入内容</string>
+
+    <string name="positive">确定</string>
+    <string name="negative">取消</string>
+    <string name="exit">退出登录</string>
 </resources>

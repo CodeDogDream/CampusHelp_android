@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.dream.work.campushelp.Interface.OnItemClickListener;
 import com.dream.work.campushelp.R;
 import com.dream.work.campushelp.entity.MenuInfo;
 import com.dream.work.campushelp.view.holder.MenuRecyclerViewHolder;
@@ -19,6 +20,11 @@ import java.util.ArrayList;
 public class MenuRecyclerViewAdapter extends RecyclerView.Adapter<MenuRecyclerViewHolder> {
     private Context context;
     private ArrayList<MenuInfo> arrayList;
+    private OnItemClickListener onItemClickListener;
+
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
+    }
 
     public MenuRecyclerViewAdapter(Context context, ArrayList<MenuInfo> arrayList) {
         this.context = context;
@@ -33,9 +39,17 @@ public class MenuRecyclerViewAdapter extends RecyclerView.Adapter<MenuRecyclerVi
     }
 
     @Override
-    public void onBindViewHolder(MenuRecyclerViewHolder holder, int position) {
+    public void onBindViewHolder(final MenuRecyclerViewHolder holder, int position) {
         holder.icon.setImageResource(arrayList.get(position).resId);
         holder.info.setText(arrayList.get(position).info);
+        holder.mRootView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (onItemClickListener != null) {
+                    onItemClickListener.onItemClick(v, holder.getAdapterPosition());
+                }
+            }
+        });
     }
 
     @Override

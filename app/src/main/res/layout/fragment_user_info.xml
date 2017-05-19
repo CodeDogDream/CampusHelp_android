@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@id/root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/aqua"
     android:orientation="vertical">
 
-    <TextView
+    <android.support.v7.widget.RecyclerView
+        android:id="@id/recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="用户信息" />
+        android:layout_height="match_parent" />
 </LinearLayout>

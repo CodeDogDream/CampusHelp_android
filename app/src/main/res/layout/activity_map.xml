@@ -3,16 +3,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.baidu.mapapi.map.MapView
-        android:id="@+id/activity_map_view"
+    <include
+        layout="@layout/map_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:clickable="true" />
+        android:layout_height="match_parent" />
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/activity_map_recycler_view"
-        android:layout_width="200dp"
+    <include
+        layout="@layout/left_menu_layout"
+        android:layout_width="280dp"
         android:layout_height="match_parent"
-        android:layout_gravity="start"
-        android:background="@color/darkturquoise" />
+        android:layout_gravity="start" />
 </android.support.v4.widget.DrawerLayout>

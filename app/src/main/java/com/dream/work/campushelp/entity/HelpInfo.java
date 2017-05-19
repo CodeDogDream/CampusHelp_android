@@ -15,6 +15,16 @@ public class HelpInfo {
     //    求助信息内容
     private String content;
 
+    private String uavatar;
+
+    public String getUavatar() {
+        return uavatar;
+    }
+
+    public void setUavatar(String uavatar) {
+        this.uavatar = uavatar;
+    }
+
     @Override
     public String toString() {
         return "HelpInfo{" +

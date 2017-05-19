@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="user_info">
+        <item>头像</item>
+        <item>昵称</item>
+        <item>个性签名</item>
+        <item>性别</item>
+    </string-array>
+
+
+
+</resources>

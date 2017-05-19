@@ -8,10 +8,9 @@
         android:id="@+id/top_bar"
         layout="@layout/top_bar" />
 
-    <fragment
+    <FrameLayout
         android:id="@+id/activity_main_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/top_bar"
-        android:name="com.dream.work.campushelp.fragment.first.UserFragment" />
+        android:layout_below="@id/top_bar" />
 </RelativeLayout>

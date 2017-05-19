@@ -2,7 +2,9 @@ package com.dream.work.campushelp.network.Interceptor;
 
 import com.dream.work.campushelp.CampusApplication;
 import com.dream.work.campushelp.helper.SharePreferenceHelper;
+import com.dream.work.campushelp.helper.ToastHelper;
 import com.dream.work.campushelp.utils.MyLog;
+import com.dream.work.campushelp.utils.RuntimeInfo;
 
 import java.io.IOException;
 
@@ -18,16 +20,11 @@ public class ResponseInterceptor implements Interceptor {
     @Override
     public Response intercept(Chain chain) throws IOException {
         Request original = chain.request();
-        String token = "";
-        try {
-            token = SharePreferenceHelper.getSharePreferenceFromString(CampusApplication.getInstance().getApplicationContext(), "token", "");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+
 
         Request request = original.newBuilder()
                 .addHeader("accept-type", "campus")
-                .addHeader("token", token)
+                .addHeader("token", RuntimeInfo.getInstance().token)
                 .method(original.method(), original.body())
                 .build();
         MyLog.v(request.toString());

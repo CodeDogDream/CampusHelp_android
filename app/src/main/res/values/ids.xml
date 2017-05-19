@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="text1" type="id">text1</item>
+    <item name="text_value" type="id">text_value</item>
+    <item name="image_view" type="id">image_view</item>
+    <item name="avatar" type="id">avatar</item>
+    <item name="root" type="id">root</item>
+    <item name="edit" type="id">edit</item>
+    <item name="location" type="id" />
+    <item name="my_title" type="id" />
+    <item name="content" type="id" />
+    <item name="tag" type="id" />
+
+    <item name="recycler_view" type="id">recycler_view</item>
+
+</resources>

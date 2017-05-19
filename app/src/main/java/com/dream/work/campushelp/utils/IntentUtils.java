@@ -13,6 +13,7 @@ import android.os.Bundle;
 public class IntentUtils {
     private static IntentUtils build;
 
+
     public static IntentUtils Builder() {
         if (build == null) {
             build = new IntentUtils();

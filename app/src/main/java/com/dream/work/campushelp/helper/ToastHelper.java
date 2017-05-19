@@ -23,8 +23,8 @@ public class ToastHelper {
         Toast.makeText(CampusApplication.getInstance().getApplicationContext(), resId, duration).show();
     }
 
-    public static void showToast(String resId) {
-        Toast.makeText(CampusApplication.getInstance().getApplicationContext(), resId, Toast.LENGTH_SHORT).show();
+    public static void showToast(String text) {
+        Toast.makeText(CampusApplication.getInstance().getApplicationContext(), text, Toast.LENGTH_SHORT).show();
     }
 
     public static void showToast(@StringRes int resId) {

@@ -12,7 +12,6 @@ import android.widget.Toast;
 import com.dream.work.campushelp.R;
 import com.dream.work.campushelp.base.BaseActivity;
 import com.dream.work.campushelp.entity.UserLogin;
-import com.dream.work.campushelp.helper.SharePreferenceHelper;
 import com.dream.work.campushelp.helper.ToastHelper;
 import com.dream.work.campushelp.network.HelpApiManager;
 import com.dream.work.campushelp.network.HttpData;
@@ -40,6 +39,10 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     public void event() {
+        if (RuntimeInfo.getInstance().isLogin) {
+            IntentUtils.Builder().target(MapActivity.class).activity(thisActivity).build();
+            finish();
+        }
         mobile_layout = (LinearLayout) findViewById(R.id.activity_login_first);
         captcha_layout = (LinearLayout) findViewById(R.id.activity_login_second);
         login_text = (TextView) findViewById(R.id.activity_login_button);
@@ -93,7 +96,7 @@ public class LoginActivity extends BaseActivity {
                 super.onError(t);
             }
         };
-        HelpApiManager.getInstance().sendRequest(ss, HttpData.LOGIN_GET_CAPTCHA, mobile);
+        HelpApiManager.getInstance().sendRequest(ss, HttpData.GET_CAPTCHA, mobile);
     }
 
     private void sendRequestForUserLogin(String mobile, String captcha) {
@@ -106,6 +109,7 @@ public class LoginActivity extends BaseActivity {
                     RuntimeInfo.getInstance().saveUserLogin(userLogin);
                     ToastHelper.showToast(R.string.login_success);
                     IntentUtils.Builder().activity(thisActivity).target(MapActivity.class).build();
+                    finish();
                 }
                 Log.v("tag", userLogin.toString());
             }
@@ -115,7 +119,7 @@ public class LoginActivity extends BaseActivity {
                 super.onError(t);
             }
         };
-        HelpApiManager.getInstance().sendRequest(ss, HttpData.LOGIN_USER_LOGIN, mobile, captcha);
+        HelpApiManager.getInstance().sendRequest(ss, HttpData.USER_LOGIN, mobile, captcha);
     }
 
     private CountDownTimer countDownTimer = new CountDownTimer(60000, 1000) {
