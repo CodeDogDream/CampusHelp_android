@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 import android.support.v7.app.AppCompatActivity;
@@ -19,6 +21,7 @@ import com.dream.work.campushelp.base.BaseActivity;
 import com.dream.work.campushelp.base.BaseFragment;
 import com.dream.work.campushelp.fragment.AboutUsFragment;
 import com.dream.work.campushelp.fragment.AddHelpInfoFragment;
+import com.dream.work.campushelp.fragment.HelpDetailFragment;
 import com.dream.work.campushelp.fragment.MyHelpInfoFragment;
 import com.dream.work.campushelp.fragment.NearByFragment;
 import com.dream.work.campushelp.fragment.ModifyUserInfoFragment;
@@ -78,6 +81,10 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case Constants.ADD_HELP_INFO:
                 baseFragment = new AddHelpInfoFragment();
+                break;
+            case Constants.HELP_DETAIL_INFO:
+                baseFragment = new HelpDetailFragment();
+                baseFragment.setArguments(getIntent().getBundleExtra("bundle"));
                 break;
             default:
                 baseFragment = new ModifyUserInfoFragment();

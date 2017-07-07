@@ -11,5 +11,6 @@ public class Constants {
     public static final String MY_HELP_INFO = "my_help_info";
     public static final String ABOUT_US = "about_us";
     public static final String ADD_HELP_INFO = "add_help_info";
+    public static final String HELP_DETAIL_INFO = "help_detail_info";
     public static final int IMAGE_PICKER = 1855;
 }

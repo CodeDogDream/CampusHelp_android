@@ -1,6 +1,7 @@
 package com.dream.work.campushelp.activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -100,11 +101,13 @@ public class MapActivity extends AppCompatActivity {
                 List<HelpInfo> infos = ParseJsonUtils.getDataFromList(dataBean.getData(), HelpInfo.class);
                 ArrayList<LatLng> lats = new ArrayList<>();
                 ArrayList<String> urls = new ArrayList<>();
+                ArrayList<Integer> ids = new ArrayList<>();
                 for (HelpInfo info : infos) {
                     lats.add(new LatLng(info.getLatitude(), info.getLongitude()));
                     urls.add(info.getUavatar());
+                    ids.add(info.getInfoId());
                 }
-                addMarker(urls, lats);
+                addMarker(urls, lats, ids);
                 sendRequestForUserInfo();
             }
 
@@ -154,7 +157,6 @@ public class MapActivity extends AppCompatActivity {
     private void initRecyclerView() {
         RelativeLayout relativeLayout = (RelativeLayout) findViewById(R.id.left_layout_top);
 
-        String url = "https://gss0.baidu.com/9vo3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/8ad4b31c8701a18bbef9f231982f07082838feba.jpg";
         relativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -200,9 +202,10 @@ public class MapActivity extends AppCompatActivity {
             @Override
             public boolean onMarkerClick(Marker marker) {
                 String text = marker.getExtraInfo().getString("info");
-                if (!TextUtils.isEmpty(text)) {
-                    Toast.makeText(thisActivity, text + "icon", Toast.LENGTH_SHORT).show();
-                }
+                Bundle bundle = new Bundle();
+                bundle.putString(Constants.Page_Type, Constants.HELP_DETAIL_INFO);
+                bundle.putString("info_id", text);
+                IntentUtils.Builder().activity(thisActivity).Bundle(bundle).target(MainActivity.class).build();
                 return false;
             }
         });
@@ -213,9 +216,6 @@ public class MapActivity extends AppCompatActivity {
                 MapStatusUpdate mapStatusUpdate = MapStatusUpdateFactory.newLatLng(current_location);
                 baiduMap.animateMapStatus(mapStatusUpdate);
 
-                Bundle bundle = new Bundle();
-                bundle.putString(Constants.Page_Type, Constants.ADD_HELP_INFO);
-                IntentUtils.Builder().activity(thisActivity).Bundle(bundle).target(MainActivity.class).build();
             }
         });
         findViewById(R.id.login_out).setOnClickListener(new View.OnClickListener() {
@@ -224,6 +224,14 @@ public class MapActivity extends AppCompatActivity {
                 RuntimeInfo.getInstance().clearData();
                 IntentUtils.Builder().target(LoginActivity.class).activity(thisActivity).build();
                 finish();
+            }
+        });
+        findViewById(R.id.add_help).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                bundle.putString(Constants.Page_Type, Constants.ADD_HELP_INFO);
+                IntentUtils.Builder().activity(thisActivity).Bundle(bundle).target(MainActivity.class).build();
             }
         });
     }
@@ -237,7 +245,7 @@ public class MapActivity extends AppCompatActivity {
         baiduMap.getUiSettings().setCompassEnabled(false);
     }
 
-    private void addMarker(ArrayList<String> urls, ArrayList<LatLng> latLngs) {
+    private void addMarker(ArrayList<String> urls, ArrayList<LatLng> latLngs, ArrayList<Integer> ids) {
         String text = Thread.currentThread().getName();
         Log.v("TAG", text);
         new Thread(DownImageService.getInstance().setData(thisActivity, urls, new ImageDownloadCallback() {
@@ -248,7 +256,7 @@ public class MapActivity extends AppCompatActivity {
                 for (LocationInfo info : files) {
                     BitmapDescriptor bitmapDescriptor = BitmapUtils.getMarker(info.file);
                     Bundle bundle = new Bundle();
-                    bundle.putString("info", "icon1");
+                    bundle.putString("info", info.info_id + "");
                     MarkerOptions markerOptions = new MarkerOptions();
                     markerOptions.icon(bitmapDescriptor)
                             .position(info.latLng)
@@ -261,7 +269,7 @@ public class MapActivity extends AppCompatActivity {
             public void onDownLoadFail() {
 
             }
-        }, latLngs)).start();
+        }, latLngs, ids)).start();
     }
 
     private void initLocation() {
@@ -304,6 +312,7 @@ public class MapActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        sendRequestForUserInfo();
         mapView.onResume();
     }
 
@@ -343,17 +352,7 @@ public class MapActivity extends AppCompatActivity {
             }
             final BitmapDescriptor[] bitmapDescriptor = {null};
 
-//            DownImageService.getInstance().setData(thisActivity, "http://k1.jsqq.net/uploads/allimg/1612/140F5A32-6.jpg", new ImageDownloadCallback() {
-//                @Override
-//                public void onDownLoadSuccess(File file) {
-//                    bitmapDescriptor[0] = BitmapDescriptorFactory.fromBitmap(BitmapUtils.toRoundBitmap(file));
-//                }
-//
-//                @Override
-//                public void onDownLoadFail() {
-//
-//                }
-//            }).run();
+
             MyLocationData data = new MyLocationData.Builder()
                     .longitude(bdLocation.getLongitude())
                     .latitude(bdLocation.getLatitude())

@@ -5,7 +5,11 @@ package com.dream.work.campushelp.network;
  */
 
 public class HttpData {
-    public static final String url = "http://172.16.0.9:8080/";
+    public static String url = "http://172.16.0.8/";
+
+    public static void setUrl(String mUrl) {
+        url = mUrl;
+    }
 
     public static final String GET_CAPTCHA = "activity_login/getCaptcha";
 
@@ -31,6 +35,9 @@ public class HttpData {
 
 
     public static final String GET_NEARBY_HELP_INFO = "help/getNearByHelpInfo";
+
+
+    public static final String GET_HELP_INFO_BY_INFO_ID = "help/getHelpInfoByInfoid";
 
 
 }

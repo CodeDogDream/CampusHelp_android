@@ -10,6 +10,11 @@
     <item name="my_title" type="id" />
     <item name="content" type="id" />
     <item name="tag" type="id" />
+    <item name="add_help" type="id" />
+    <item name="user_name" type="id" />
+    <item name="detail_info" type="id" />
+    <item name="top_layout" type="id" />
+
 
     <item name="recycler_view" type="id">recycler_view</item>
 

@@ -6,6 +6,8 @@ import android.support.multidex.MultiDexApplication;
 import com.baidu.mapapi.SDKInitializer;
 import com.dream.work.campushelp.utils.RuntimeInfo;
 
+import cn.jpush.android.api.JPushInterface;
+
 /**
  * Created by Administrator on 2017/3/15.
  */
@@ -19,6 +21,8 @@ public class CampusApplication extends MultiDexApplication {
         MultiDex.install(this);
         campusApplication = this;
         SDKInitializer.initialize(getApplicationContext());
+        JPushInterface.init(getApplicationContext());
+        JPushInterface.setDebugMode(false);
         RuntimeInfo.getInstance().updateInfo();
     }
 

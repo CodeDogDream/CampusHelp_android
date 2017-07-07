@@ -93,6 +93,9 @@ public class HelpApiManager {
             case HttpData.GET_NEARBY_HELP_INFO:
                 flowable = helpApi.getNearByHelpInfo(parameter[0], parameter[1], parameter[2]);
                 break;
+            case HttpData.GET_HELP_INFO_BY_INFO_ID:
+                flowable = helpApi.getHelpInfoByInfoid(parameter[0]);
+                break;
             default:
                 flowable = Flowable.just(new DataBean());
                 break;
@@ -161,5 +164,9 @@ public class HelpApiManager {
 
         @POST("help/getNearByHelpInfo/{id}/{longitude}/{latitude}")
         Flowable<DataBean> getNearByHelpInfo(@Path("id") String id, @Path("longitude") String longitude, @Path("latitude") String latitude);
+
+        @POST("help/getHelpInfoByInfoid/{info_id}")
+        Flowable<DataBean> getHelpInfoByInfoid(@Path("info_id") String info_id);
+
     }
 }

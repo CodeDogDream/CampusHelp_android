@@ -20,6 +20,7 @@ public class DownImageService implements Runnable {
     private Context context;
     private static DownImageService instant;
     private ArrayList<LatLng> location;
+    private ArrayList<Integer> ids;
 
     public static DownImageService getInstance() {
         if (instant == null) {
@@ -37,11 +38,12 @@ public class DownImageService implements Runnable {
 
     }
 
-    public DownImageService setData(Context context, ArrayList<String> urls, ImageDownloadCallback callback, ArrayList<LatLng> location) {
+    public DownImageService setData(Context context, ArrayList<String> urls, ImageDownloadCallback callback, ArrayList<LatLng> location, ArrayList<Integer> ids) {
         this.urls = urls;
         this.callback = callback;
         this.context = context;
         this.location = location;
+        this.ids = ids;
         return this;
     }
 
@@ -54,7 +56,7 @@ public class DownImageService implements Runnable {
                         .load(urls.get(i))
                         .downloadOnly(200, 200)
                         .get();
-                files.add(new LocationInfo(file, location.get(i)));
+                files.add(new LocationInfo(file, location.get(i), ids.get(i)));
             } catch (Exception e) {
                 e.printStackTrace();
                 callback.onDownLoadFail();

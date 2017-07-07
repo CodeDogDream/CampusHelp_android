@@ -32,4 +32,7 @@
     <string name="positive">确定</string>
     <string name="negative">取消</string>
     <string name="exit">退出登录</string>
+
+
+    <string name="help_detail">求助详情</string>
 </resources>

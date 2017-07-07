@@ -88,7 +88,8 @@ public class ModifyUserInfoFragment extends BaseFragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         initImagePicker();
-
+        thisActivity.setTitle(R.string.modify_user_info);
+        sendRequestForUserInfo();
         adapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
@@ -155,8 +156,14 @@ public class ModifyUserInfoFragment extends BaseFragment {
                 }
             }
         });
-        thisActivity.setTitle(R.string.modify_user_info);
-        sendRequestForUserInfo();
+        if(alertDialog != null) {
+            alertDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+                @Override
+                public void onCancel(DialogInterface dialog) {
+                    sendRequestForUserInfo();
+                }
+            });
+        }
     }
 
     @Override
@@ -184,8 +191,10 @@ public class ModifyUserInfoFragment extends BaseFragment {
             @Override
             public void onNext(DataBean dataBean) {
                 super.onNext(dataBean);
-                UserInfo userInfo = ParseJsonUtils.getData(dataBean.getData(), UserInfo.class);
-                adapter.setUserInfo(userInfo);
+                if (dataBean.getCode() == 0) {
+                    UserInfo userInfo = ParseJsonUtils.getData(dataBean.getData(), UserInfo.class);
+                    adapter.setUserInfo(userInfo);
+                }
             }
 
             @Override

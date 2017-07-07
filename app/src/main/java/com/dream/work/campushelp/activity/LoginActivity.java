@@ -1,6 +1,8 @@
 package com.dream.work.campushelp.activity;
 
+import android.content.DialogInterface;
 import android.os.CountDownTimer;
+import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -39,6 +41,18 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     public void event() {
+        findViewById(R.id.login_image).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final EditText editText=new EditText(thisActivity);
+                new AlertDialog.Builder(thisActivity).setView(editText).setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        HttpData.setUrl(editText.getText().toString().trim());
+                    }
+                }).setCancelable(true).show();
+            }
+        });
         if (RuntimeInfo.getInstance().isLogin) {
             IntentUtils.Builder().target(MapActivity.class).activity(thisActivity).build();
             finish();

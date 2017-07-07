@@ -77,6 +77,9 @@ public class AddHelpInfoFragment extends BaseFragment {
             @Override
             public void onNext(DataBean dataBean) {
                 super.onNext(dataBean);
+                if(dataBean.getCode() == 0){
+                    thisActivity.finish();
+                }
             }
 
             @Override
